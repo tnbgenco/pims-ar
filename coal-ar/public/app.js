@@ -10,11 +10,6 @@ renderer.setPixelRatio(Math.min(devicePixelRatio,2)); renderer.setSize(innerWidt
 renderer.outputColorSpace=THREE.SRGBColorSpace; container.appendChild(renderer.domElement);
 const controls=new OrbitControls(camera,renderer.domElement); controls.enableDamping=true;controls.maxPolarAngle=Math.PI*.46;controls.minDistance=11;controls.maxDistance=36;
 const plant=new THREE.Group();scene.add(plant);
-let modelSize=1;
-function setModelSize(value){modelSize=Math.max(.5,Math.min(3,value));plant.scale.setScalar(modelSize);$('#size-value').textContent=Math.round(modelSize*100)+'%';$('#size-down').disabled=modelSize<=.5;$('#size-up').disabled=modelSize>=3;}
-$('#size-up').onclick=()=>setModelSize(modelSize+.25);
-$('#size-down').onclick=()=>setModelSize(modelSize-.25);
-$('#size-reset').onclick=()=>setModelSize(1);
 function lighting(s){s.add(new THREE.HemisphereLight(0xa9d9ff,0x263851,2.4));const sun=new THREE.DirectionalLight(0xffe2b5,3);sun.position.set(-4,9,6);s.add(sun);const blue=new THREE.DirectionalLight(0x40a8ff,2.5);blue.position.set(5,5,-6);s.add(blue);}
 lighting(scene);
 const mats={};function mat(c,metal=.15){const k=c+':'+metal;return mats[k]??=new THREE.MeshStandardMaterial({color:c,roughness:.65,metalness:metal});}
