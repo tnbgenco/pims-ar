@@ -13,6 +13,6 @@ await page.screenshot({path:'test-results/direct-ar.png'});
 await page.click('#exit');if(await page.locator('#start').isHidden())throw Error('Restart unavailable');
 if(await page.evaluate(()=>[...document.querySelectorAll('video')].some(v=>v.srcObject?.getTracks().some(t=>t.readyState==='live'))))throw Error('Camera remains active');
 await page.click('#start');await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Image detected'),{},{timeout:90000});
-console.log('PASS: automatic AR, photograph detected, no landing, stop and restart');
+console.log('PASS: automatic AR, flyer detected, no landing, stop and restart');
 const denied=await browser.newContext({permissions:[]});const p=await denied.newPage();await p.addInitScript(()=>{navigator.mediaDevices.getUserMedia=async()=>{throw new DOMException('Denied','NotAllowedError');};});await p.goto('http://localhost:8080/');await p.waitForFunction(()=>window.pimsAR && !pimsAR.state.starting && !document.querySelector('#start').hidden);if(!await p.locator('#start').isVisible())throw Error('Retry missing');console.log('PASS: denied camera offers retry');
 }catch(e){console.error(e);process.exitCode=1;}finally{await browser.close();process.exit(process.exitCode||0);}

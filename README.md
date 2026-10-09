@@ -5,7 +5,7 @@ An animated, blue-hour coal power plant inspired by the supplied reference photo
 ## Use on a phone
 
 1. Open the deployed HTTPS website in Safari on iPhone or Chrome on Android.
-2. Display `coal-ar/public/target.png` on another screen, or print it without cropping. The original photograph also has the same composition.
+2. Display `coal-ar/public/flyer-target.png` on another screen, or print it without cropping. Use the full, uncropped Design F A4 flyer. The original plant photograph is no longer the tracking target.
 3. AR starts automatically. Allow the camera and point at the entire picture. If permission is denied or the browser needs a tap, use **Enable AR camera** to retry. Avoid glare and keep the picture well lit.
 4. Choose **Normal operation** or **Shipment bunching**. Pause or explore the four component explanations.
 5. **Exit AR** stops the camera. Tap **Enable AR camera** to resume.
@@ -29,7 +29,7 @@ The GitHub Actions workflow publishes `coal-ar/public` on pushes to `main`. Enab
 
 ## Image target
 
-`target.mind` is compiled from the full `target.png` photograph. To change the scan image, replace the PNG and recompile with the [MindAR compiler](https://hiukim.github.io/mind-ar-js-doc/tools/compile/). Save its output as `coal-ar/public/target.mind`. `compile.html` is the equivalent developer utility for this image.
+`flyer-target.mind` is compiled from the full `flyer-target.png` A4 flyer. To change the scan image, replace the PNG and recompile with the [MindAR compiler](https://hiukim.github.io/mind-ar-js-doc/tools/compile/). Save its output as `coal-ar/public/flyer-target.mind`. `compile.html` is the equivalent developer utility for this image.
 
 ## Limitations
 
@@ -37,7 +37,7 @@ Image tracking depends on lighting, print quality, camera and browser capabiliti
 
 ## Validation
 
-The initial preview was checked at desktop and mobile sizes. The current mobile (390 × 844) direct-AR flow was checked in Chromium for automatic startup without a click, no landing page, camera stop/restart and retry after permission denial. A synthetic camera feed of the supplied photograph was successfully detected by MindAR; exiting AR stopped the camera tracks. No browser page errors were observed. These checks do not substitute for a real phone test.
+The initial preview was checked at desktop and mobile sizes. The current mobile (390 × 844) direct-AR flow was checked in Chromium for automatic startup without a click, no landing page, camera stop/restart and retry after permission denial. A synthetic camera feed of the supplied A4 flyer was successfully detected by MindAR; exiting AR stopped the camera tracks. No browser page errors were observed. These checks do not substitute for a real phone test.
 
 `coal-ar/verify.mjs` uses Playwright. Install Playwright locally or set `PLAYWRIGHT_PATH` to its installed package, optionally set `CHROME_PATH` to a browser executable, and run it from `coal-ar`. `TEST_CAMERA` may point to a Y4M camera fixture. The script requires a Y4M camera fixture at `TEST_CAMERA` (default: `test-results/camera.y4m`). It verifies automatic startup, target detection, stop/restart and the permission-denied retry screen, and writes an ignored screenshot. Use `public/compile.html` separately to compile a new image target.
 
