@@ -1,14 +1,14 @@
 # PIMS · Coal Power AR
 
-An animated, blue-hour coal power plant inspired by the supplied reference photograph. Malay mobile interface, interactive 3D preview and image-tracked augmented reality using MindAR and Three.js.
+An animated, blue-hour coal power plant inspired by the supplied reference photograph. English mobile interface that opens directly into image-tracked augmented reality using MindAR and Three.js.
 
 ## Use on a phone
 
 1. Open the deployed HTTPS website in Safari on iPhone or Chrome on Android.
 2. Display `coal-ar/public/target.png` on another screen, or print it without cropping. The original photograph also has the same composition.
-3. Tap **Mula AR**, allow the camera, and point at the entire picture. Avoid glare and keep the picture well lit.
-4. Choose **Operasi biasa** or **Shipment bunching**. Pause or explore the four component explanations.
-5. **Keluar AR** stops the camera and returns to the orbitable 3D preview.
+3. AR starts automatically. Allow the camera and point at the entire picture. If permission is denied or the browser needs a tap, use **Enable AR camera** to retry. Avoid glare and keep the picture well lit.
+4. Choose **Normal operation** or **Shipment bunching**. Pause or explore the four component explanations.
+5. **Exit AR** stops the camera. Tap **Enable AR camera** to resume.
 
 Animations include coal stockpiles, a slewing reclaimer with a rotating bucket wheel, conveyor loads, a ship unloader, twin stacks and an illustrative boiler glow. Shipment bunching shows one vessel at berth and two waiting. This is a conceptual teaching model, not engineering geometry, live telemetry or a shipping forecast. The turbine, pulverizer and emissions-treatment systems are not modelled.
 
@@ -37,8 +37,8 @@ Image tracking depends on lighting, print quality, camera and browser capabiliti
 
 ## Validation
 
-Desktop (1440 × 1000) and mobile (390 × 844) preview smoke checks passed in Chromium: mode switching, pause/resume, component navigation, target dialog and no horizontal page overflow. A synthetic camera feed of the supplied photograph was successfully detected by MindAR; exiting AR stopped the camera tracks. No browser page errors were observed. These checks do not substitute for a real phone test.
+The initial preview was checked at desktop and mobile sizes. The current mobile (390 × 844) direct-AR flow was checked in Chromium for automatic startup without a click, no landing page, camera stop/restart and retry after permission denial. A synthetic camera feed of the supplied photograph was successfully detected by MindAR; exiting AR stopped the camera tracks. No browser page errors were observed. These checks do not substitute for a real phone test.
 
-`coal-ar/verify.mjs` uses Playwright. Install Playwright locally or set `PLAYWRIGHT_PATH` to its installed package, optionally set `CHROME_PATH` to a browser executable, and run it from `coal-ar`. `TEST_CAMERA` may point to a Y4M camera fixture. The script recompiles `target.mind` and writes ignored screenshots under `test-results`.
+`coal-ar/verify.mjs` uses Playwright. Install Playwright locally or set `PLAYWRIGHT_PATH` to its installed package, optionally set `CHROME_PATH` to a browser executable, and run it from `coal-ar`. `TEST_CAMERA` may point to a Y4M camera fixture. The script requires a Y4M camera fixture at `TEST_CAMERA` (default: `test-results/camera.y4m`). It verifies automatic startup, target detection, stop/restart and the permission-denied retry screen, and writes an ignored screenshot. Use `public/compile.html` separately to compile a new image target.
 
 Built with [Three.js](https://threejs.org/) and [MindAR](https://hiukim.github.io/mind-ar-js-doc/). Reference photograph supplied by the user.
